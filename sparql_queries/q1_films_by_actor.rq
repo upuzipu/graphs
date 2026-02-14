@@ -1,0 +1,18 @@
+# Q1: Все фильмы и сериалы с заданным актёром (по имени)
+
+PREFIX movies: <http://example.org/movies#>
+PREFIX id: <http://example.org/movies/id/>
+
+SELECT ?title ?releaseDate ?voteAverage ?imdbId
+WHERE {
+  ?actor a movies:Actor ;
+         movies:personName ?actorName ;
+         movies:actedIn ?film .
+  { ?film a movies:Movie } UNION { ?film a movies:TVSeries }
+  ?film movies:title ?title .
+  OPTIONAL { ?film movies:releaseDate ?releaseDate . }
+  OPTIONAL { ?film movies:voteAverage ?voteAverage . }
+  OPTIONAL { ?film movies:imdbId ?imdbId . }
+  FILTER(CONTAINS(LCASE(?actorName), "bale"))
+}
+ORDER BY DESC(?releaseDate)

@@ -1,0 +1,143 @@
+@prefix : <http://example.org/movies#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+:Work a owl:Class ;
+    rdfs:label "Кинопроизведение"@ru ;
+    rdfs:comment "Фильм или сериал — любая кинематографическая работа"@ru .
+
+:Movie a owl:Class ;
+    rdfs:subClassOf :Work ;
+    rdfs:label "Фильм"@ru .
+
+:TVSeries a owl:Class ;
+    rdfs:subClassOf :Work ;
+    rdfs:label "Сериал"@ru .
+
+:Person a owl:Class ;
+    rdfs:label "Персона"@ru ;
+    rdfs:comment "Актер, режиссер или другой участник съемок"@ru .
+
+:Actor a owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "Актер"@ru .
+
+:Director a owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "Режиссер"@ru .
+
+:Genre a owl:Class ;
+    rdfs:label "Жанр"@ru .
+
+:Award a owl:Class ;
+    rdfs:label "Награда"@ru ;
+    rdfs:comment "Награда за фильм (Оскар, Золотой глобус и т.д.)"@ru .
+
+:actedIn a owl:ObjectProperty ;
+    rdfs:domain :Actor ;
+    rdfs:range :Work ;
+    rdfs:label "сыграл в"@ru ;
+    rdfs:comment "Связь актера с фильмом/сериалом"@ru .
+
+:directed a owl:ObjectProperty ;
+    rdfs:domain :Director ;
+    rdfs:range :Work ;
+    rdfs:label "снял"@ru .
+
+:hasGenre a owl:ObjectProperty ;
+    rdfs:domain :Work ;
+    rdfs:range :Genre ;
+    rdfs:label "принадлежит к жанру"@ru .
+
+:hasAward a owl:ObjectProperty ;
+    rdfs:domain :Work ;
+    rdfs:range :Award ;
+    rdfs:label "получил награду"@ru .
+
+:hasCastOrder a owl:ObjectProperty ;
+    rdfs:label "порядок в титрах"@ru ;
+    rdfs:comment "Позиция актера в титрах (для сортировки)"@ru .
+
+:title a owl:DatatypeProperty ;
+    rdfs:domain :Work ;
+    rdfs:range xsd:string ;
+    rdfs:label "название"@ru .
+
+:originalTitle a owl:DatatypeProperty ;
+    rdfs:domain :Work ;
+    rdfs:range xsd:string ;
+    rdfs:label "оригинальное название"@ru .
+
+:overview a owl:DatatypeProperty ;
+    rdfs:domain :Work ;
+    rdfs:range xsd:string ;
+    rdfs:label "описание"@ru .
+
+:releaseDate a owl:DatatypeProperty ;
+    rdfs:domain :Work ;
+    rdfs:range xsd:date ;
+    rdfs:label "дата выхода"@ru .
+
+:personName a owl:DatatypeProperty ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string ;
+    rdfs:label "имя"@ru .
+
+:genreName a owl:DatatypeProperty ;
+    rdfs:domain :Genre ;
+    rdfs:range xsd:string ;
+    rdfs:label "название жанра"@ru .
+
+:userRating a owl:DatatypeProperty ;
+    rdfs:domain :Work ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "моя оценка"@ru ;
+    rdfs:comment "Оценка пользователя от 0 до 10"@ru .
+
+:watched a owl:DatatypeProperty ;
+    rdfs:domain :Work ;
+    rdfs:range xsd:boolean ;
+    rdfs:label "просмотрено"@ru .
+
+:tmdbId a owl:DatatypeProperty ;
+    rdfs:label "ID в TMDb"@ru ;
+    rdfs:comment "Внешний идентификатор для связи с API"@ru .
+
+:tmdbPersonId a owl:DatatypeProperty ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:integer ;
+    rdfs:label "ID персоны в TMDb"@ru .
+
+:imdbId a owl:DatatypeProperty ;
+    rdfs:label "ID в IMDb (tconst)"@ru ;
+    rdfs:comment "Идентификатор фильма/сериала в IMDb"@ru .
+
+:imdbPersonId a owl:DatatypeProperty ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string ;
+    rdfs:label "ID персоны в IMDb (nconst)"@ru .
+
+:awardName a owl:DatatypeProperty ;
+    rdfs:domain :Award ;
+    rdfs:range xsd:string ;
+    rdfs:label "название награды"@ru .
+
+:characterName a owl:DatatypeProperty ;
+    rdfs:label "имя персонажа"@ru ;
+    rdfs:comment "Имя роли актера в данном фильме"@ru .
+
+:castOrder a owl:DatatypeProperty ;
+    rdfs:range xsd:integer ;
+    rdfs:label "порядок в титрах"@ru .
+
+:voteAverage a owl:DatatypeProperty ;
+    rdfs:domain :Work ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "средний рейтинг TMDb"@ru .
+
+:popularity a owl:DatatypeProperty ;
+    rdfs:domain :Work ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "популярность (TMDb)"@ru .

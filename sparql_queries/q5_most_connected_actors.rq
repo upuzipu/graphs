@@ -1,0 +1,16 @@
+# Q5: Самые "связные" актёры в коллекции — у кого больше всего фильмов/сериалов
+# Визуальная карта: такие узлы будут самыми заметными. Учитываются и Movie, и TVSeries.
+
+PREFIX movies: <http://example.org/movies#>
+PREFIX id: <http://example.org/movies/id/>
+
+SELECT ?actorName (COUNT(?film) AS ?filmCount)
+WHERE {
+  ?actor a movies:Actor ;
+         movies:personName ?actorName ;
+         movies:actedIn ?film .
+  { ?film a movies:Movie } UNION { ?film a movies:TVSeries }
+}
+GROUP BY ?actor ?actorName
+ORDER BY DESC(?filmCount)
+LIMIT 15

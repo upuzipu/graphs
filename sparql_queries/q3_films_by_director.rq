@@ -1,0 +1,18 @@
+# Q3: Все фильмы/сериалы режиссёра (например, Нолана — какие ещё не смотрел?)
+
+PREFIX movies: <http://example.org/movies#>
+PREFIX id: <http://example.org/movies/id/>
+
+SELECT ?title ?releaseDate ?voteAverage ?imdbId
+WHERE {
+  ?director a movies:Director ;
+            movies:personName ?directorName ;
+            movies:directed ?film .
+  { ?film a movies:Movie } UNION { ?film a movies:TVSeries }
+  ?film movies:title ?title .
+  OPTIONAL { ?film movies:releaseDate ?releaseDate . }
+  OPTIONAL { ?film movies:voteAverage ?voteAverage . }
+  OPTIONAL { ?film movies:imdbId ?imdbId . }
+  FILTER(CONTAINS(LCASE(?directorName), "nolan"))
+}
+ORDER BY ?releaseDate

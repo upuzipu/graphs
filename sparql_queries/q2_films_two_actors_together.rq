@@ -1,0 +1,24 @@
+# Q2: В каких ещё фильмах/сериалах вместе играли эти два актёра?
+
+PREFIX movies: <http://example.org/movies#>
+PREFIX id: <http://example.org/movies/id/>
+
+SELECT ?title ?releaseDate ?imdbId
+WHERE {
+  { ?film a movies:Movie } UNION { ?film a movies:TVSeries }
+  ?film movies:title ?title .
+  OPTIONAL { ?film movies:releaseDate ?releaseDate . }
+  OPTIONAL { ?film movies:imdbId ?imdbId . }
+
+  ?a1 a movies:Actor ;
+      movies:personName ?name1 ;
+      movies:actedIn ?film .
+  ?a2 a movies:Actor ;
+      movies:personName ?name2 ;
+      movies:actedIn ?film .
+
+  FILTER(?a1 != ?a2)
+  FILTER(CONTAINS(LCASE(?name1), "hanks"))
+  FILTER(CONTAINS(LCASE(?name2), "dicaprio"))
+}
+ORDER BY DESC(?releaseDate)

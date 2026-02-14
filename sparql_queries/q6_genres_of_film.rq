@@ -1,0 +1,15 @@
+# Q6: Жанры конкретного фильма/сериала по названию
+# Подставьте в FILTER подстроку названия: "inception", "Начало", "matrix" и т.д.
+
+PREFIX movies: <http://example.org/movies#>
+PREFIX id: <http://example.org/movies/id/>
+
+SELECT ?title ?genreName ?imdbId
+WHERE {
+  { ?film a movies:Movie } UNION { ?film a movies:TVSeries }
+  ?film movies:title ?title ;
+        movies:hasGenre ?genre .
+  ?genre movies:genreName ?genreName .
+  OPTIONAL { ?film movies:imdbId ?imdbId . }
+  FILTER(CONTAINS(LCASE(?title), "inception"))
+}

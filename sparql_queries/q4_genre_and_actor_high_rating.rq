@@ -1,0 +1,25 @@
+# Q4: Фильмы/сериалы заданного жанра с заданным актёром и рейтингом не ниже 8
+
+PREFIX movies: <http://example.org/movies#>
+PREFIX id: <http://example.org/movies/id/>
+
+SELECT ?title ?genreName ?voteAverage ?releaseDate ?imdbId
+WHERE {
+  { ?film a movies:Movie } UNION { ?film a movies:TVSeries }
+  ?film movies:title ?title ;
+        movies:hasGenre ?genre ;
+        movies:voteAverage ?voteAverage .
+  ?genre movies:genreName ?genreName .
+
+  ?actor a movies:Actor ;
+         movies:personName ?actorName ;
+         movies:actedIn ?film .
+
+  OPTIONAL { ?film movies:releaseDate ?releaseDate . }
+  OPTIONAL { ?film movies:imdbId ?imdbId . }
+
+  FILTER(CONTAINS(LCASE(?actorName), "dicaprio"))
+  FILTER(CONTAINS(LCASE(?genreName), "thriller"))
+  FILTER(?voteAverage >= 8)
+}
+ORDER BY DESC(?voteAverage)
