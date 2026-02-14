@@ -94,17 +94,3 @@ python visualize_kg.py movies_kg.ttl movies_graph.html
 
 Файл `ontology/movies_ontology.ttl` — классы Movie, TVSeries, Person, Actor, Director, Genre; свойства title, actedIn, directed, hasGenre и др.
 
----
-
-## 6. Подключение к SPARQL endpoint из Python
-
-```bash
-pip install sparqlwrapper
-```
-
-```python
-from SPARQLWrapper import SPARQLWrapper
-wrapper = SPARQLWrapper("http://localhost:3030/ds/sparql")
-wrapper.setQuery("SELECT * WHERE { ?s ?p ?o } LIMIT 10")
-results = wrapper.query().convert()
-```
