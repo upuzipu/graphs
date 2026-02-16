@@ -1,5 +1,4 @@
 # Q6: Жанры конкретного фильма/сериала по названию
-# Подставьте в FILTER подстроку названия: "inception", "Начало", "matrix" и т.д.
 
 PREFIX movies: <http://example.org/movies#>
 PREFIX id: <http://example.org/movies/id/>
