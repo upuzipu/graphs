@@ -9,8 +9,8 @@ import requests
 from rdflib import Graph, Namespace, Literal
 from rdflib.namespace import RDF, RDFS, XSD
 
-MOVIES = Namespace("http://example.org/movies#")
-BASE = Namespace("http://example.org/movies/id/")
+MOVIES = Namespace("http://github.com/upuzipu/movies#")
+BASE = Namespace("http://github.com/upuzipu/movies/id/")
 
 TMDB_BASE = "https://api.themoviedb.org/3"
 

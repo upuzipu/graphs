@@ -7,8 +7,8 @@ from urllib.parse import urlparse
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDF
 
-MOVIES_NS = "http://example.org/movies#"
-BASE_NS = "http://example.org/movies/id/"
+MOVIES_NS = "http://github.com/upuzipu/movies#"
+BASE_NS = "http://github.com/upuzipu/movies/id/"
 
 
 def _short_label(uri, g: Graph):
